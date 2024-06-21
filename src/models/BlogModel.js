@@ -26,7 +26,7 @@ const blogSchema = mongoose.Schema({
 		required: true
 	},
 	likes: {
-		type: [String], // come back later and replace this with a Mongoose object ID ,
+		type: [{types: mongoose.Schema.Types.ObjectId, ref: "User"}], // come back later and replace this with a Mongoose object ID ,
 		required: false
 	},
 	headerImage: {

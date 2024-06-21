@@ -11,6 +11,7 @@
 */
 
 const mongoose = require("mongoose");
+import { commentSchema } from "./CommentModel";
 
 const blogSchema = mongoose.Schema({
 	title: {
@@ -22,7 +23,7 @@ const blogSchema = mongoose.Schema({
 		required: true
 	},
 	author: {
-		type: String, // come back later and replace this with a Mongoose object ID 
+		type: [{types: mongoose.Schema.Types.ObjectId, ref: "User"}], // come back later and replace this with a Mongoose object ID 
 		required: true
 	},
 	likes: {
@@ -45,6 +46,12 @@ const blogSchema = mongoose.Schema({
 	editHistory: {
 		type: [{user: String, timestamp: Date}],
 		required: false
+	},
+	commentsAsObj: {
+		type: [{userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, content: {type: String}}]
+	},
+	comments: {
+		type: [commentSchema]
 	}
 },
 {

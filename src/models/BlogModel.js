@@ -11,7 +11,7 @@
 */
 
 const mongoose = require("mongoose");
-import { commentSchema } from "./CommentModel";
+const { commentSchema } = require("./CommentSchema.js");
 
 const blogSchema = mongoose.Schema({
 	title: {
@@ -23,7 +23,8 @@ const blogSchema = mongoose.Schema({
 		required: true
 	},
 	author: {
-		type: [{types: mongoose.Schema.Types.ObjectId, ref: "User"}], // come back later and replace this with a Mongoose object ID 
+		type: mongoose.Schema.Types.ObjectId, 
+		ref: "User", // come back later and replace this with a Mongoose object ID 
 		required: true
 	},
 	likes: {
@@ -47,9 +48,11 @@ const blogSchema = mongoose.Schema({
 		type: [{user: String, timestamp: Date}],
 		required: false
 	},
-	commentsAsObj: {
-		type: [{userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, content: {type: String}}]
-	},
+	// This is what we would write if we do NOT use subdocuments:
+	// commentsAsObj: {
+	// 	type: [{userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, content: {type: String}}]
+	// },
+	// This is what we would write if we DO use subdocuments:
 	comments: {
 		type: [commentSchema]
 	}

@@ -25,11 +25,11 @@ const blogSchema = mongoose.Schema({
 	},
 	author: {
 		type: mongoose.Schema.Types.ObjectId, 
-		ref: "User", // come back later and replace this with a Mongoose object ID 
+		ref: "User",
 		required: true
 	},
 	likes: {
-		type: [{types: mongoose.Schema.Types.ObjectId, ref: "User"}], // come back later and replace this with a Mongoose object ID ,
+		type: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}], 
 		required: false
 	},
 	headerImage: {
@@ -51,11 +51,13 @@ const blogSchema = mongoose.Schema({
 	},
 	// This is what we would write if we do NOT use subdocuments:
 	// commentsAsObj: {
-	// 	type: [{userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, content: {type: String}}]
+	// 	type: [{userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"}, content: {type: String}}],
+	// 	required: false
 	// },
-	// This is what we would write if we DO use subdocuments:
+	// This is what we would write if we DO use subdocuments: 
 	comments: {
-		type: [commentSchema]
+		type: [commentSchema],
+		required: false
 	}
 },
 {
